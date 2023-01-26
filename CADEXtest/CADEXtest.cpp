@@ -9,7 +9,7 @@
 
 int main()
 {
-	// Список рандомных фигур с рандомными параметрами
+	// Random curves list with random params
 	srand((unsigned)time(NULL));
 	std::list<Curve*> Curves;
 	std::cout << "Random Curves List:" << std::endl;
@@ -35,7 +35,7 @@ int main()
 		}
 	}
 
-	// Вычисление координат и производной при t = PI/4
+	// Coords and derivatives calculation at t = PI/4
 	std::list<Curve*>::iterator CurvesIter = Curves.begin();
 	int Row = 1;
 	std::cout << std::endl << "Coordinates and derivatives at PI/4:" << std::endl;
@@ -45,7 +45,7 @@ int main()
 		Row++;
 	}
 
-	// Второй список, состоящий только из кругов
+	// Second list, circles only
 	std::vector<Circle*> Circles;
 	for (CurvesIter = Curves.begin(); CurvesIter != Curves.end(); ++CurvesIter)
 	{
@@ -55,7 +55,7 @@ int main()
 		}
 	}
 
-	// Сумма радиусов кругов из второго списка
+	// Circles Radiii Sum from second list
 	int RadiusSum = 0;
 	#pragma omp parallel for default(none) shared(Circles)
 	for (int i = 0; i < Circles.size(); i++)
@@ -65,7 +65,7 @@ int main()
 	std::cout << std::endl << "Circles Radiii Sum: " << RadiusSum << std::endl;
 
 
-	// Сортировка второго списка по радиусу
+	// Second list sorted by radius
 	std::sort(Circles.begin(), Circles.end(), [](Circle* a, Circle* b) -> bool {return a->GetRadius() < b->GetRadius(); });
 	std::cout << std::endl << "Sorted circles list: " << std::endl;
 	std::vector<Circle*>::iterator CirclesIter = Circles.begin();
